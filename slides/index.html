@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Functional JavaScript. Wut?</title>
+
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="css/reveal.min.css">
+  <link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+  <!-- For syntax highlighting -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+
+  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+  <script>
+    if (window.location.search.match(/print-pdf/gi)) {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = 'css/print/pdf.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    }
+  </script>
+
+  <!--[if lt IE 9]><script src="lib/js/html5shiv.js"></script><![endif]-->
+</head>
+
+<body>
+
+  <div class="reveal">
+
+    <div class="slides">
+
+      <section class="" data-id="cc9fd991e857133849dff542d09671a4">
+        <h1>Functional JavaScript. Wut?</h1>
+
+        <p>In which I expound on things that are interesting to me.</p>
+      </section>
+
+      <!-- Chapter 1 -->
+      <section class="stack" data-id="10905154caa3e6532ec3b7b69dcd1643">
+
+        <section class="" data-id="daed8280c84bc729c11e65daa3d06b93">
+          <h1>What Is Functional Programming?</h1>
+
+          <p>It is a programming style that "...produces abstraction through clever ways of combining functions" <a href="http://eloquentjavascript.net/chapter6.html#p1029fd844bd24fc8">[1]</a>
+          </p>
+        </section>
+
+        <section class="" data-id="23684788dd5e21bbe48bd38c1f919f0c">
+          <h1>What Is Functional Programming?</h1>
+
+          <p>How is abstraction produced using this style of programming?</p>
+
+          <ul>
+            <li>Leverage <b>first class functions</b> and <b>high order functions</b>
+            </li>
+            <li>Avoid mutation</li>
+            <li>Avoid side effects</li>
+          </ul>
+        </section>
+
+        <section class="" data-id="68a86bfb8cdf3e66e030dbbbeab1e46b">
+          <h2>First Class Functions</h2>
+
+          <p>First class functions are values, and can be used in every way that typical expressions can</p>
+
+          <ul>
+            <li>Can be assigned to <b>variables</b>
+            </li>
+            <li>Can be <b>returned</b> by functions</li>
+            <li>Can be passed as <b>arguments</b> to other functions</li>
+          </ul>
+        </section>
+
+        <section class="" data-id="89e4365e7387764966be22ec56b760a4">
+          <h2>First Class Functions</h2>
+
+          <h3>Can be assigned to <b>variables</b></h3>
+
+          <pre><code>var foo = function(){return};</code></pre>
+
+          <h3>Can be <b>returned</b> by functions</h3>
+
+          <pre>
+        <code>
+          var bar = function(){
+            return function(){return};
+          };
+        </code>
+      </pre>
+
+          <h3>Can be passed as <b>arguments</b> to other functions</h3>
+
+          <pre>
+        <code>
+          var baz = qux(func) {
+            return func();
+          };
+        </code>
+      </pre>
+        </section>
+
+        <section class="" data-id="94f4c7b78dc388523118aac9c3887845">
+          <h2>High Order Functions</h2>
+
+          <ul>
+            <li>Use functions as its parameters</li>
+            <li><b>And</b> return a function</li>
+          </ul>
+        </section>
+
+        <section class="" data-id="504cd9b16f87757f228e6d7e3c9183ec">
+          <h2>High Order Functions</h2>
+
+          <pre>
+        <code>
+          var bar = function(func) {
+            return function() {
+              return func();
+            };
+          };
+        </code>
+      </pre>
+        </section>
+
+        <section class="" data-id="3934e2ad0f01faaf89deb18f338328e8">
+          <h2>Mutation and Side-effects: State</h2>
+
+          <ul>
+            <li>What is state?</li>
+            <li>How does FP avoid mutating state?</li>
+          </ul>
+        </section>
+
+        <section class="" data-id="126ba63e5a5587aacda63dbd898db9ab">
+          <h2>Mutation and Side-effects: State</h2>
+          <h3>functions that don't mutate the variables passed to them</h3>
+
+          <h4>stateful:</h4>
+
+          <pre>
+        <code>
+          var number = 1
+
+          var increment = function() {
+              return number += 1;
+          };
+
+          increment();
+        </code>
+      </pre>
+
+          <h4>stateless:</h4>
+
+          <pre>
+        <code>
+          var number = 1;
+
+          var increment = function(n) {
+              return n + 1;
+          };
+
+          increment(number);
+        </code>
+      </pre>
+
+          <p>*Credit to Stephen Young <a href="http://stephen-young.me.uk/2013/01/20/functional-programming-with-javascript.html">[2]</a>
+          </p>
+        </section>
+
+        <section class="" data-id="2144406672145248cb5bdf9216cd2612">
+          <h2>Mutation and Side-effects: State</h2>
+          <h3>Functions that don't produce side-effects</h3>
+
+          <h4>stateful:</h4>
+
+          <pre>
+        <code>
+          var loop = function() {
+              for (var x = 0; x < 10; x += 1) {
+                  console.log(x);
+              }
+          };
+
+          loop();
+        </code>
+      </pre>
+
+          <h4>stateless:</h4>
+
+          <pre>
+        <code>
+          var loop = function(n) {
+              if (n > 9) {
+                  console.log(n);
+                  return;
+              } else {
+                  console.log(n);
+                  loop(n + 1);
+              }
+          };
+
+          loop(0);
+        </code>
+      </pre>
+
+          <p>*Stephen Young <a href="http://stephen-young.me.uk/2013/01/20/functional-programming-with-javascript.html">[2]</a>
+          </p>
+        </section>
+
+        <section class="" data-id="e8cb12597bee1c7be18edcd8606cb66e">
+          <h2>An Aside: Functional Programming Languages</h2>
+          <ul>
+            <li>FP needs to be facilitated by language features</li>
+            <li>Some languages are strictly functional - <b>Haskell</b>
+            </li>
+            <li>Some languages are functional without strict enforcement - <b>JavaScript</b>
+            </li>
+          </ul>
+        </section>
+
+      </section>
+
+      <!-- Chapter 2 -->
+      <section class="stack" data-id="ae5c19d005812ca70478b50110e3fc07">
+
+        <section class="" data-id="02926f541fb87bf5db0e57849f1aa42e">
+          <h1>Why Functional Programming?</h1>
+          <h2>And Why Do It With JavaScript?</h2>
+
+          <ul>
+            <li>FP is a language feature</li>
+            <li>Functional JS makes your programs better</li>
+            <li>Functional JS makes you a better programmer</li>
+            <li>Learning FP concepts transfers to other languages</li>
+          </ul>
+        </section>
+
+        <section class="" data-id="a72c76fcbaa6ee74b66c3075cfd40511">
+          <h2>FP is a Language Feature</h2>
+
+          <ul>
+            <li>JS has first class functions (function expressions)</li>
+            <li>JS has high-order functions</li>
+          </ul>
+        </section>
+
+        <section class="" data-id="566e065e9ddfee918af290e3a29271ad">
+          <h2>Functional JS Makes Your Programs Better</h2>
+
+          <ul>
+            <li>Encourages small units of code</li>
+            <li>Is easier to reason about</li>
+            <li>Is DRY (do not repeat yourself)</li>
+          </ul>
+        </section>
+
+        <section class="" data-id="597d1d810f75e5ed3034118cc6d538a1">
+          <h2>Functional JS Makes You A Better Programmer</h2>
+
+          <ul>
+            <li>Deepens understanding of JS</li>
+            <li>Results in more elegant code</li>
+          </ul>
+        </section>
+
+        <section class="" data-id="ae7c271f2bdc242ba6960251d4d70904">
+          <h2>FP Concepts Transfers To Other Languages</h2>
+          <h3>it's a style, not a syntax</h3>
+
+          <ul>
+            <li>Haskell</li>
+            <li>Erlang</li>
+            <li>Scala</li>
+            <li>Clojure</li>
+            <li>Many more...</li>
+          </ul>
+        </section>
+
+      </section>
+
+
+      <!-- Chapter 3 -->
+      <section class="stack" data-id="41bc117fe303ce8ffbdb16468f444593">
+
+        <section class="" data-id="b8dfc6c17c6f9c73bf3b491ad2edc4ec">
+          <h1>Alright, Okay, Alright</h1>
+          <h2>How, Functional JavaScript?</h2>
+
+          <ul>
+            <li>First, a review</li>
+            <li>Use recursion for looping</li>
+            <li>Build curried functions</li>
+            <li>Use Array.prototype#methods</li>
+            <li>Build predicate functions</li>
+            <li>Compose functions with functions</li>
+            <li>Use closures</li>
+          </ul>
+        </section>
+
+        <section class="" data-id="9984fc44b43564ef8ef6025736dee681">
+          <h2>First, A Review</h2>
+          <h3>we know:</h3>
+
+          <ul>
+            <li>What function expressions are</li>
+            <li>What high-order functions are</li>
+            <li>What stateless functions are</li>
+          </ul>
+        </section>
+
+        <section class="" data-id="0b0886b68e86c66dc746c4ab6ffee9c2">
+          <h2>Use Recursion For Looping</h2>
+
+          <ul>
+            <li>Can be stateless</li>
+            <li>Can be memoized</li>
+            <li>Have a call stack limitations</li>
+            <li>Can be trampolined</li>
+          </ul>
+        </section>
+
+        <section class="" data-id="aa94e7ce75244c5f5a44d9fe03dc3c3c">
+          <h2>Use Recursion For Looping</h2>
+
+          <h4>functions that call themselves:</h4>
+
+          <pre>
+        <code>
+          var loop = function(n) {
+              if (n > 9) {
+                  console.log(n);
+                  return;
+              } else {
+                  console.log(n);
+                  loop(n + 1);
+              }
+          };
+
+          loop(0);
+        </code>
+      </pre>
+
+        </section>
+
+        <section class="" data-id="9e72d11c63aebda508b5e474d15262cd">
+          <h2>Build Curried Functions</h2>
+
+          <blockquote>
+            <p>Currying is the act of taking a function that takes more than one argument and converting it to an equivalent function taking one argument.</p>
+            <p>*Reginald Braithwaite <a href="http://braythwayt.com/">[3]</a>
+            </p>
+          </blockquote>
+
+          <ul>
+            <li>Functions that wait to yield a value until all arguments are passed</li>
+            <li>In other words, a variadic function made of nested unary functions</li>
+            <li>Can be approximated using Function.prototype.bind()</li>
+          </ul>
+
+        </section>
+
+        <section class="" data-id="9e72d11c63aebda508b5e474d15262cd">
+          <h2>Build Curried Functions</h2>
+        </section>
+
+        <section class="" data-id="a456bd3f1ca3290dcaa50f1bae74e3fb">
+          <h2>Use Array.prototype#Methods</h2>
+          <ul>
+            <li>Array.prototype.map()</li>
+            <li>Array.prototype.map.filter()</li>
+            <li>Array.prototype.map.reduce()</li>
+          </ul>
+        </section>
+
+        <section class="" data-id="5876a7cc8561f8794b40fd4e51d23b4b">
+          <h2>Use Array.prototype#Methods</h2>
+
+          <h4>Array.prototype.map()</h4>
+
+          <pre>
+        <code>
+          var squared = [1, 2, 3, 4, 5].map(function(el) {
+            return Math.pow(el, 2);
+          });
+        </code>
+      </pre>
+        </section>
+
+        <section class="" data-id="69ddf6217f237312414fb225f0e38f39">
+          <h2>Use Array.prototype#Methods</h2>
+
+          <h4>Array.prototype.filter()</h4>
+
+          <pre>
+        <code>
+          var even = [1, 2, 3, 4, 5].filter(function(el) {
+            return el % 2 === 0;
+          });
+        </code>
+      </pre>
+        </section>
+
+        <section class="" data-id="77b7841cd2563739412e716095e8ecb8">
+          <h2>Use Array.prototype#Methods</h2>
+
+          <h4>Array.prototype.reduce()</h4>
+
+          <pre>
+        <code>
+          var sum = [1, 2, 3, 4, 5].reduce(function(memo, curr) {
+            return memo + curr;
+          });
+        </code>
+      </pre>
+        </section>
+
+        <section class="" data-id="1feba7642918fb60880567003750466a">
+          <h2>Build Predicate Functions</h2>
+
+          <ul>
+            <li>Return a boolean (true/false) after a test</li>
+            <li>Useful for plucking values out of lists</li>
+            <li>Essential for function composition</li>
+          </ul>
+        </section>
+
+        <section class="" data-id="1feba7642918fb60880567003750466a">
+          <h2>Build Predicate Functions</h2>
+        </section>
+
+        <section class="" data-id="ae9238649f8a2cef9fcefb7d576ea242">
+          <h2>Compose Functions With Functions</h2>
+          <h3>the bluebird combinator</h3>
+
+        </section>
+
+        <section class="" data-id="413f73ace7ae050a4c7f0ec3fb92687c">
+          <h2>Use Closures</h2>
+        </section>
+
+      </section>
+
+      <!-- Chapter 4 -->
+      <section class="" data-id="2060a7739dbc939fd7ce3de3d33cc5f7">
+        <h1>ez Mode (AKA Easy Mode)</h1>
+        <h2>Functional JavaScript Libraries</h2>
+
+        <ul>
+          <li>Underscore</li>
+          <li>Lo-dash</li>
+          <li>Ramda</li>
+        </ul>
+      </section>
+
+      <!-- Chapter 5 -->
+      <section class="" data-id="2290863103678faa525bad68e06bfed7">
+        <h2>Further Reading</h2>
+
+        <ul>
+          <li>Lambda functions</li>
+          <li>Combinators</li>
+          <li>Monads</li>
+          <li>Memoization</li>
+          <li>Trampolines</li>
+          <li>Tail-call optimization</li>
+        </ul>
+      </section>
+
+      <!-- Chapter 5 -->
+      <section class="" data-id="432423c8553a486d54143970bcc06a53">
+        <h1>Just Lots Of Resources</h1>
+
+        <h4>books:</h4>
+        <ul>
+          <li>JavaScript Allongé</li>
+          <li>Functional JavaScript</li>
+        </ul>
+
+        <h4>posts:</h4>
+        <ul>
+          <li><a href="http://www.smashingmagazine.com/2014/07/02/dont-be-scared-of-functional-programming">Don't be scared of functional programming</a>
+          </li>
+        </ul>
+
+        <h4>vids:</h4>
+        <ul>
+          <li>Underscore, you're doing it wrong</li>
+        </ul>
+
+        <h4>other junk:</h4>
+        <ul>
+          <li>Annotated Underscore source</li>
+          <li>https://jhusain.github.io/learnrx</li>
+        </ul>
+      </section>
+
+    </div>
+
+  </div>
+
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.min.js"></script>
+
+  <script>
+    // Full list of configuration options available here:
+     // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+
+      theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+      transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+      // Parallax scrolling
+      // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+      // parallaxBackgroundSize: '2100px 900px',
+
+      // Optional libraries used to extend on reveal.js
+      dependencies: [{
+        src: 'lib/js/classList.js',
+        condition: function() {
+          return !document.body.classList;
+        }
+      }, {
+        src: 'plugin/markdown/marked.js',
+        condition: function() {
+          return !!document.querySelector('[data-markdown]');
+        }
+      }, {
+        src: 'plugin/markdown/markdown.js',
+        condition: function() {
+          return !!document.querySelector('[data-markdown]');
+        }
+      }, {
+        src: 'plugin/highlight/highlight.js',
+        async: true,
+        callback: function() {
+          hljs.initHighlightingOnLoad();
+        }
+      }, {
+        src: 'plugin/zoom-js/zoom.js',
+        async: true,
+        condition: function() {
+          return !!document.body.classList;
+        }
+      }, {
+        src: 'plugin/notes/notes.js',
+        async: true,
+        condition: function() {
+          return !!document.body.classList;
+        }
+      }]
+    });
+  </script>
+
+</body>
+
+</html>
