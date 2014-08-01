@@ -18,6 +18,12 @@
 <!-- For syntax highlighting -->
 <link rel="stylesheet" href="lib/css/zenburn.css">
 
+<style>
+  code {
+    font-size: 2em;
+  }
+</style>
+
 <!-- If the query includes 'print-pdf', include the PDF print sheet -->
 <script>
 if (window.location.search.match(/print-pdf/gi)) {
@@ -38,141 +44,286 @@ if (window.location.search.match(/print-pdf/gi)) {
 
   <div class="slides">
 
-    <section class="" data-id="cc9fd991e857133849dff542d09671a4">
+    <section>
       <h1>Functional JavaScript. Wut?</h1>
       <p>In which I expound on things that are interesting to me.</p>
 
       <aside class="notes">
-        Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+        <p>Welcome to my talk</p>
+        <p>I've been really focusing on learning JS</p>
+        <p>That's led me to funcitonal programming via JS</p>
+        <p>It's exciting</p>
+        <p>I don't have all the answers, but thought I would share what I've been learning about, what excites me</p>
       </aside>
     </section>
 
     <!-- Chapter 1 -->
-    <section class="stack" data-id="10905154caa3e6532ec3b7b69dcd1643">
+    <section class="stack">
 
-      <section class="" data-id="daed8280c84bc729c11e65daa3d06b93">
+      <section class="">
         <h1>What Is Functional Programming?</h1>
         <p>It is a programming style that "...produces abstraction through clever ways of combining functions" <a href="http://eloquentjavascript.net/chapter6.html#p1029fd844bd24fc8">[1]</a></p>
+
+        <aside class="notes">
+          <p>What is abstraction? It's a less verbose way of describing the solution to the problem</p>
+          <p>Why is abstraction good? It allows us to write more generalized solutions.</p>
+
+          <p>At it's core, the function is an abstraction. It encapsulates some operation we would like to do over and over</p>
+        </aside>
       </section>
 
-      <section class="" data-id="23684788dd5e21bbe48bd38c1f919f0c">
+      <section class="">
         <h1>What Is Functional Programming?</h1>
         <p>How is abstraction produced using this style of programming?</p>
+        <p class="fragment">By Leveraging <b>first class functions</b> and <b>high order functions</b></p>
 
-        <ul>
-          <li>Leverage <b>first class functions</b> and <b>high order functions</b></li>
-          <li>Avoid mutation</li>
-          <li>Avoid side effects</li>
-        </ul>
+        <aside class="notes">
+          <p>Pretty straight-up. So, we'll need a functional language, then.</p>
+        </aside>
       </section>
 
-      <section class="" data-id="68a86bfb8cdf3e66e030dbbbeab1e46b">
+      <section class="">
+        <h2>To Functionally Program, You Need A Functional Language</h2>
+
+        <ul>
+          <li class="fragment">FP needs to be facilitated by language features</li>
+          <li class="fragment">Some languages are strictly functional - <b>Haskell</b></li>
+          <li class="fragment">Some languages are functional without strict enforcement - <b>JavaScript</b></li>
+        </ul>
+
+        <aside class="notes">
+          <p>Obviously, the things we've talked about need to be facilitated by language</p>
+          <p>Some languages are pure functional, others are a mash-up</p>
+          <p>I'll be using JavaScript as the language of example</p>
+        </aside>
+      </section>
+
+      <section class="">
         <h2>First Class Functions</h2>
-        <p>First class functions are values, and can be used in every way that typical expressions can</p>
+        <p>First class functions are <b>values</b>, and can be used in every way that typical expressions can</p>
 
-        <ul>
-          <li>Can be assigned to <b>variables</b></li>
-          <li>Can be <b>returned</b> by functions</li>
-          <li>Can be passed as <b>arguments</b> to other functions</li>
-        </ul>
+        <aside class="notes">
+          <p>They are values. The benefit from all the advantages of being values.</p>
+          <p>Assignment, return, argument, etc.</p>
+        </aside>
       </section>
 
-      <section class="" data-id="89e4365e7387764966be22ec56b760a4">
+      <section class="">
         <h2>First Class Functions</h2>
 
         <p>Can be assigned to <b>variables</b></p>
 
-        <pre>
+        <pre class="fragment">
           <code>
-            var foo = function(){return};
+            var foo = function() {return 'hai'};
+
+            foo(); // "hai"
           </code>
         </pre>
+
+        <aside class="notes">
+          <p>You can see here that we are assigning a function to a variable.</p>
+          <p>Note that it's not the return value of the function that is assigned, but the function itself.</p>
+          <p>Expression vs. declaration. Declarations are basically destructured to expressions</p>
+        </aside>
       </section>
 
-      <section class="" data-id="89e4365e7387764966be22ec56b760a4">
+      <section class="">
         <h2>First Class Functions</h2>
 
         <p>Can be <b>returned</b> by functions</p>
 
-        <pre>
+        <pre class="fragment">
           <code>
-            var bar = function(){
-              return function(){return};
+            var bar = function() {
+              return function() {return 'hai'};
             };
+
+            bar(); // function () {return 'hai'}
           </code>
         </pre>
+
+        <aside class="notes">
+          <p>Note that we assign a function to the variable bar</p>
+          <p>And when we call the function referenced by bar, we get another function</p>
+        </aside>
       </section>
 
-      <section class="" data-id="89e4365e7387764966be22ec56b760a4">
+      <section class="">
         <h2>First Class Functions</h2>
 
         <p>Can be passed as <b>arguments</b> to other functions</p>
 
-        <pre>
+        <pre class="fragment">
           <code>
-            var baz = qux(func) {
+            var baz = function(func) {
               return func();
             };
+
+            baz(function() {return 'hai'}) // "hai"
           </code>
         </pre>
+
+        <aside class="notes">
+          <p>Here, we add a function to our argument list. It gets fired off from the original function, since it's been aliased to func</p>
+        </aside>
       </section>
 
-      <section class="" data-id="94f4c7b78dc388523118aac9c3887845">
+      <section class="">
         <h2>High Order Functions</h2>
+        <p>Use functions as its parameters <b>and</b> return a function</p>
 
-        <ul>
-          <li>Use functions as its parameters</li>
-          <li><b>And</b> return a function</li>
-        </ul>
-
-        <pre>
+        <pre class="fragment">
           <code>
             var bar = function(func) {
               return function() {
                 return func();
               };
             };
+
+            bar(function() {return 'hai'})() // "hai"
           </code>
         </pre>
+
+        <aside class="notes">
+          <p>This is pretty close to the last one</p>
+          <p>It's really the combination of all of the above</p>
+          <p>Also notice I immediately invoke the function at the end</p>
+        </aside>
       </section>
 
-      <section class="" data-id="3934e2ad0f01faaf89deb18f338328e8">
-        <h2>Mutation and Side-effects: State</h2>
+    </section>
+
+    <!-- Chapter 2 -->
+    <section class="stack">
+
+      <section class="">
+        <h1>Why Functional Programming?</h1>
+        <p>And why do it with JavaScript?</p>
+
+        <aside class="notes">
+        </aside>
+      </section>
+
+      <section class="">
+        <h2>FP is a Language Feature</h2>
 
         <ul>
-          <li>What is state?</li>
-          <li>How does FP avoid mutating state?</li>
+          <li class="fragment">JS has first class functions (function expressions)</li>
+          <li class="fragment">JS has high-order functions</li>
+        </ul>
+
+        <aside class="notes">
+          <p>Since FP is a language feature of JS, it available. Some of the best aspects of JS are it's functions, says Crockford</p>
+        </aside>
+      </section>
+
+      <section class="">
+        <h2>Functional JS Makes Your Programs Better</h2>
+
+        <ul>
+          <li class="fragment">Encourages small units of code</li>
+          <li class="fragment">Is easier to reason about</li>
+          <li class="fragment">Is DRY (do not repeat yourself)</li>
+        </ul>
+
+        <aside class="notes">
+          <p>Small functions are testable</p>
+          <p>Small functions are single responsibility, less cognitive load</p>
+
+          <ul>
+            <li>It also makes you a better programmer by...</li>
+            <li>Increasing the depth of your JS knowledge and...</li>
+            <li>If all goes well, results in elegant code</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section class="">
+        <h2>FP Concepts Transfers To Other Languages</h2>
+        <p>it's a style, not a syntax</p>
+
+        <ul>
+          <li class="fragment">Haskell</li>
+          <li class="fragment">Erlang</li>
+          <li class="fragment">Scala</li>
+          <li class="fragment">Clojure</li>
+          <li class="fragment">Many more...</li>
+        </ul>
+
+        <aside class="notes">
+          <p>It gives you a powerful concept that may lead you elsewhere</p>
+        </aside>
+      </section>
+
+    </section>
+
+    <!-- Chapter 3 -->
+    <section class="stack">
+
+      <section class="">
+        <h1>Alright, Okay, Alright</h1>
+        <p>How, functional JavaScript?</p>
+
+        <aside class="notes">
+          <p>I'll show you a few of the absractions we can use with FP, now that we have first class functions and high order functions.</p>
+          <ul>
+            <li>First, a review</li>
+            <li>Use recursion for looping</li>
+            <li>Build curried functions</li>
+            <li>Use Array.prototype#methods</li>
+            <li>Build predicate functions</li>
+            <li>Compose functions with functions</li>
+            <li>Use closures</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section class="">
+        <h2>First, A Review</h2>
+        <p>We know:</p>
+
+        <ul>
+          <li class="fragment">What function expressions are</li>
+          <li class="fragment">What high-order functions are</li>
         </ul>
       </section>
 
-      <section class="" data-id="126ba63e5a5587aacda63dbd898db9ab">
-        <h2>Mutation and Side-effects: State</h2>
-        <p>Functions that don't mutate the variables passed to them</p>
+      <section class="">
+        <h2>Stateless functions</h2>
+        <p>Stateful functions mutate variables outside of their scope. FP avoids mutation.</p>
 
-        <h4>stateful:</h4>
-
-        <pre>
+        <pre class="fragment">
           <code>
-            var number = 1
+            var number = 1; // This is NOT functional programming
 
             var increment = function() {
                 return number += 1;
             };
 
-            increment();
+            increment(); // 2
+            increment(); // 3
+            increment(); // 4
           </code>
+
+          * Stephen Young <a href="http://stephen-young.me.uk/2013/01/20/functional-programming-with-javascript.html">[2]</a>
         </pre>
 
-        <p>* Credit to Stephen Young <a href="http://stephen-young.me.uk/2013/01/20/functional-programming-with-javascript.html">[2]</a></p>
+        <aside class="notes">
+          <ul>
+            <li>What is state? It's what keeps track of the state of our program, where it's at, what values it's messing with</li>
+            <li>Like, what page am I on? What todo have I selected?</li>
+            <li>At a lower level, it's storing state in variables</li>
+            <li>How does FP avoid mutating state?</li>
+          </ul>
+        </aside>
       </section>
 
       <section>
-        <h2>Mutation and Side-effects: State</h2>
-        <p>Functions that don't mutate the variables passed to them</p>
+        <h2>Stateless Functions</h2>
+        <p>Stateless functions don't mutate variables outside their scope</p>
 
-        <h4>stateless:</h4>
-
-        <pre>
+        <pre class="fragment">
           <code>
             var number = 1;
 
@@ -182,39 +333,32 @@ if (window.location.search.match(/print-pdf/gi)) {
 
             increment(number);
           </code>
+
+          * Stephen Young <a href="http://stephen-young.me.uk/2013/01/20/functional-programming-with-javascript.html">[2]</a>
         </pre>
 
-        <p>* Credit to Stephen Young <a href="http://stephen-young.me.uk/2013/01/20/functional-programming-with-javascript.html">[2]</a></p>
+        <aside class="notes">
+          <p>The point of stateless functions is to always get the same results from a function call when the same value is passed. This means the functions are more predictable. Kind of a big deal for concurrency</p>
+          <p>This kind of results in a pipeline of new stuff, instead of changing other stuff</p>
+          <p>Like a hierarchy. Changing global states can have unexpected consequences</p>
+        </aside>
       </section>
 
-      <section class="" data-id="2144406672145248cb5bdf9216cd2612">
-        <h2>Mutation and Side-effects: State</h2>
-        <p>Functions that don't produce side-effects</p>
+      <section class="">
+        <h2>Use Recursion For Looping</h2>
 
-        <h4>stateful:</h4>
-
-        <pre>
-          <code>
-            var loop = function() {
-                for (var x = 0; x < 10; x += 1) {
-                    console.log(x);
-                }
-            };
-
-            loop();
-          </code>
-        </pre>
-
-        <p>* Credit to Stephen Young <a href="http://stephen-young.me.uk/2013/01/20/functional-programming-with-javascript.html">[2]</a></p>
+        <blockquote>
+          <p>To understand recursion, you must understand recursion.</p>
+          <p>*Anonymous</p>
+        </blockquote>
       </section>
 
-      <section>
-        <h2>Mutation and Side-effects: State</h2>
-        <p>Functions that don't produce side-effects</p>
+      <section class="">
+        <h2>Use Recursion For Looping</h2>
 
-        <h4>stateless:</h4>
+        <p>Functions that call themselves</p>
 
-        <pre>
+        <pre class="fragment">
           <code>
             var loop = function(n) {
                 if (n > 9) {
@@ -228,146 +372,21 @@ if (window.location.search.match(/print-pdf/gi)) {
 
             loop(0);
           </code>
+
+          * Stephen Young <a href="http://stephen-young.me.uk/2013/01/20/functional-programming-with-javascript.html">[2]</a>
         </pre>
 
-        <p>* Credit to Stephen Young <a href="http://stephen-young.me.uk/2013/01/20/functional-programming-with-javascript.html">[2]</a></p>
+        <aside class="notes">
+          <ul>
+            <li>Can be stateless</li>
+            <li>Can be memoized</li>
+            <li>Have a call stack limitations</li>
+            <li>Can be trampolined</li>
+          </ul>
+        </aside>
       </section>
 
-      <section class="" data-id="e8cb12597bee1c7be18edcd8606cb66e">
-        <h2>An Aside: Functional Programming Languages</h2>
-
-        <ul>
-          <li>FP needs to be facilitated by language features</li>
-          <li>Some languages are strictly functional - <b>Haskell</b></li>
-          <li>Some languages are functional without strict enforcement - <b>JavaScript</b></li>
-        </ul>
-      </section>
-
-    </section>
-
-    <!-- Chapter 2 -->
-    <section class="stack" data-id="ae5c19d005812ca70478b50110e3fc07">
-
-      <section class="" data-id="02926f541fb87bf5db0e57849f1aa42e">
-        <h1>Why Functional Programming?</h1>
-        <p>And why do it with JavaScript?</p>
-
-        <!-- <ul> -->
-        <!--   <li>FP is a language feature</li> -->
-        <!--   <li>Functional JS makes your programs better</li> -->
-        <!--   <li>Functional JS makes you a better programmer</li> -->
-        <!--   <li>Learning FP concepts transfers to other languages</li> -->
-        <!-- </ul> -->
-      </section>
-
-      <section class="" data-id="a72c76fcbaa6ee74b66c3075cfd40511">
-        <h2>FP is a Language Feature</h2>
-
-        <ul>
-          <li>JS has first class functions (function expressions)</li>
-          <li>JS has high-order functions</li>
-        </ul>
-      </section>
-
-      <section class="" data-id="566e065e9ddfee918af290e3a29271ad">
-        <h2>Functional JS Makes Your Programs Better</h2>
-
-        <ul>
-          <li>Encourages small units of code</li>
-          <li>Is easier to reason about</li>
-          <li>Is DRY (do not repeat yourself)</li>
-        </ul>
-      </section>
-
-      <section class="" data-id="597d1d810f75e5ed3034118cc6d538a1">
-        <h2>Functional JS Makes You A Better Programmer</h2>
-
-        <ul>
-          <li>Deepens understanding of JS</li>
-          <li>Results in more elegant code</li>
-        </ul>
-      </section>
-
-      <section class="" data-id="ae7c271f2bdc242ba6960251d4d70904">
-        <h2>FP Concepts Transfers To Other Languages</h2>
-        <p>it's a style, not a syntax</p>
-
-        <ul>
-          <li>Haskell</li>
-          <li>Erlang</li>
-          <li>Scala</li>
-          <li>Clojure</li>
-          <li>Many more...</li>
-        </ul>
-      </section>
-
-    </section>
-
-
-    <!-- Chapter 3 -->
-    <section class="stack" data-id="41bc117fe303ce8ffbdb16468f444593">
-
-      <section class="" data-id="b8dfc6c17c6f9c73bf3b491ad2edc4ec">
-        <h1>Alright, Okay, Alright</h1>
-        <p>How, functional JavaScript?</p>
-
-        <!-- <ul> -->
-        <!--   <li>First, a review</li> -->
-        <!--   <li>Use recursion for looping</li> -->
-        <!--   <li>Build curried functions</li> -->
-        <!--   <li>Use Array.prototype#methods</li> -->
-        <!--   <li>Build predicate functions</li> -->
-        <!--   <li>Compose functions with functions</li> -->
-        <!--   <li>Use closures</li> -->
-        <!-- </ul> -->
-      </section>
-
-      <section class="" data-id="9984fc44b43564ef8ef6025736dee681">
-        <h2>First, A Review</h2>
-        <p>We know:</p>
-
-        <ul>
-          <li>What function expressions are</li>
-          <li>What high-order functions are</li>
-          <li>What stateless functions are</li>
-        </ul>
-      </section>
-
-      <section class="" data-id="0b0886b68e86c66dc746c4ab6ffee9c2">
-        <h2>Use Recursion For Looping</h2>
-
-        <ul>
-          <li>Can be stateless</li>
-          <li>Can be memoized</li>
-          <li>Have a call stack limitations</li>
-          <li>Can be trampolined</li>
-        </ul>
-      </section>
-
-      <section class="" data-id="aa94e7ce75244c5f5a44d9fe03dc3c3c">
-        <h2>Use Recursion For Looping</h2>
-
-        <p>Functions that call themselves:</p>
-
-        <pre>
-          <code>
-            var loop = function(n) {
-                if (n > 9) {
-                    console.log(n);
-                    return;
-                } else {
-                    console.log(n);
-                    loop(n + 1);
-                }
-            };
-
-            loop(0);
-          </code>
-        </pre>
-
-      </section>
-
-      <section class="" data-id="9e72d11c63aebda508b5e474d15262cd">
+      <section class="">
         <h2>Build Curried Functions</h2>
 
         <blockquote>
@@ -375,19 +394,12 @@ if (window.location.search.match(/print-pdf/gi)) {
           <p>*Reginald Braithwaite <a href="http://braythwayt.com/">[3]</a> </p>
         </blockquote>
 
-        <ul>
-          <li>Functions made up of unary functions</li>
-          <li>Functions that wait to yield a value until all arguments are passed</li>
-          <li>In other words, a variadic function made of nested unary functions</li>
-          <li>Can be approximated using Function.prototype.bind()</li>
-        </ul>
-
       </section>
 
-      <section class="" data-id="9e72d11c63aebda508b5e474d15262cd">
+      <section class="">
         <h2>Build Curried Functions</h2>
 
-        <pre>
+        <pre class="fragment">
           <code>
             var foo = function (x) {
                return function (y) {
@@ -401,94 +413,116 @@ if (window.location.search.match(/print-pdf/gi)) {
              bar(2)(3) // 6
           </code>
         </pre>
+
+        <aside class="notes">
+          <p>Closures also</p>
+          <p>Function context. Talk about this more with closures.</p>
+          <ul>
+            <li>Functions made up of unary functions</li>
+            <li>Functions that wait to yield a value until all arguments are passed</li>
+            <li>In other words, a variadic function made of nested unary functions</li>
+            <li>Can be approximated using Function.prototype.bind()</li>
+          </ul>
+        </aside>
       </section>
 
-      <section class="" data-id="a456bd3f1ca3290dcaa50f1bae74e3fb">
+      <section class="">
         <h2>Use Array.prototype#Methods</h2>
 
-        <ul>
-          <li>Array.prototype.map()</li>
-          <li>Array.prototype.map.filter()</li>
-          <li>Array.prototype.map.reduce()</li>
-        </ul>
+        <blockquote>
+          <p>Applicative programming is a technique that allows a function to be applied to each element of a list</p>
+          <p>*Mary Simoni <a href="http://quod.lib.umich.edu/s/spobooks/bbv9810.0001.001/1:15/--algorithmic-composition-a-gentle-introduction-to-music?rgn=div1;view=fulltext">[4]</a></p>
+        </blockquote>
+
+        <aside class="notes">
+          <p>Ever used these Array methods? Then you've been doing applicative programming. Functional Fu.</p>
+        </aside>
       </section>
 
-      <section class="" data-id="5876a7cc8561f8794b40fd4e51d23b4b">
+      <section class="">
         <h2>Use Array.prototype#Methods</h2>
 
         <p>Array.prototype.map()</p>
 
-        <pre>
+        <pre class="fragment">
           <code>
             var squared = [1, 2, 3, 4, 5].map(function(el) {
               return Math.pow(el, 2);
-            });
+            }); // [1, 4, 9, 16, 25]
           </code>
         </pre>
+
+        <aside class="notes">
+          <p>Note that we're not mutating here, storing our return in a new bucket.</p>
+        </aside>
       </section>
 
-      <section class="" data-id="69ddf6217f237312414fb225f0e38f39">
+      <section class="">
         <h2>Use Array.prototype#Methods</h2>
 
         <p>Array.prototype.filter()</p>
 
-        <pre>
+        <pre class="fragment">
           <code>
             var even = [1, 2, 3, 4, 5].filter(function(el) {
               return el % 2 === 0;
-            });
+            }); // [2, 4]
           </code>
         </pre>
       </section>
 
-      <section class="" data-id="77b7841cd2563739412e716095e8ecb8">
+      <section class="">
         <h2>Use Array.prototype#Methods</h2>
 
         <p>Array.prototype.reduce()</p>
 
-        <pre>
+        <pre class="fragment">
           <code>
             var sum = [1, 2, 3, 4, 5].reduce(function(memo, curr) {
               return memo + curr;
-            });
+            }); // 15
           </code>
         </pre>
       </section>
 
-      <section class="" data-id="1feba7642918fb60880567003750466a">
+      <section class="">
         <h2>Build Predicate Functions</h2>
 
-        <ul>
-          <li>Return a boolean (true/false) after a test</li>
-          <li>Useful for plucking values out of lists</li>
-          <li>Essential for function composition</li>
-        </ul>
+        <blockquote>
+          <p>A predicate determines whether or not something is true or false.</p>
+        </blockquote>
       </section>
 
-      <section class="" data-id="1feba7642918fb60880567003750466a">
+      <section class="">
         <h2>Build Predicate Functions</h2>
 
-        <pre>
+        <pre class="fragment">
           <code>
-            isNull = function(obj) {
+            var isNull = function(obj) {
                 return obj === null;
             };
 
             isNull(null) // true
           </code>
         </pre>
+        <aside class="notes">
+          <p>Talk about filter.</p>
+        </aside>
       </section>
 
-      <section class="" data-id="ae9238649f8a2cef9fcefb7d576ea242">
+      <section class="">
         <h2>Compose Functions With Functions</h2>
 
-        // Notes about composed
+        <blockquote>
+          <p>It’s really that simple: Whenever you are chaining two or more functions together, you’re composing them</p>
+          <p>*Reginald Braithwaite <a href="http://braythwayt.com/">[3]</a></p>
+        </blockquote>
       </section>
 
-      <section class="" data-id="ae9238649f8a2cef9fcefb7d576ea242">
+      <section class="">
         <h2>Compose Functions With Functions</h2>
 
-        <pre>
+        <pre class="fragment">
           <code>
             var compose = function(a, b) {
               return function (c) {
@@ -500,15 +534,27 @@ if (window.location.search.match(/print-pdf/gi)) {
             var double = function(number) { return number * 2 };
             var addOneAndDouble = compose(double, addOne); // right to left
 
-            addOneAndDouble(2) // 6
+            addOneAndDouble(2); // 6
           </code>
         </pre>
+
+        <aside class="notes">
+          <p>asdfasdfasdf</p>
+        </aside>
       </section>
 
-      <section class="" data-id="413f73ace7ae050a4c7f0ec3fb92687c">
+      <section class="">
+        <h2>Use Closures</h2>
+        <blockquote>
+          <p>A closure is an inner function that has access to the outer (enclosing) function’s variables—scope chain. The closure has three scope chains: it has access to its own scope (variables defined between its curly brackets), it has access to the outer function’s variables, and it has access to the global variables.</p>
+          <p>*<a href="http://javascriptissexy.com/understand-javascript-closures-with-ease/">[]</a></p>
+        </blockquote>
+      </section>
+
+      <section class="">
         <h2>Use Closures</h2>
 
-        <pre>
+        <pre class="fragment">
           <code>
             function stringCount(string) {
               return function(subString) {
@@ -521,69 +567,114 @@ if (window.location.search.match(/print-pdf/gi)) {
             count('sup'); // 3
           </code>
         </pre>
+
+        <aside class="notes">
+          <p>Check out closures. Same as curried functions.</p>
+          <p>Talk about funciton context. Lexical scope. Every inner level can access its outer level</p>
+        </aside>
       </section>
 
     </section>
 
     <!-- Chapter 4 -->
-    <section class="" data-id="2060a7739dbc939fd7ce3de3d33cc5f7">
+    <section class="stack">
 
-      <section>
+      <section class="">
         <h1>ez Mode</h1>
 
         <p>(AKA Easy Mode)</p>
+        <aside class="notes">
+          <p>Don't need libraries, but because FP is made up of many common idioms, it's nice to not have to write them.</p>
+        </aside>
       </section>
 
       <section>
         <h2>Underscore/Lo-Dash</h2>
+
+        <pre class="fragment">
+          <code>
+            var numbers = _.filter([1, 'foo', 3, 'bar', 5, 6], _.isNumber); // [1, 3, 5, 6]
+
+            var evens = _.filter([1, 2, 3, 4, 5, 6], function(num) {
+              return num % 2 == 0;
+            }); // [2, 4, 6]
+          </code>
+        </pre>
       </section>
 
       <section>
         <h2>Ramda</h2>
+
+        <pre class="fragment">
+          <code>
+            var evens = ramda.filter(function(num){ return num % 2 === 0; });
+            evens([1, 2, 3, 4, 5, 6]); // [2, 4, 6]
+          </code>
+        </pre>
       </section>
 
     </section>
 
     <!-- Chapter 5 -->
-    <section class="" data-id="2290863103678faa525bad68e06bfed7">
-      <h2>Further Reading</h2>
+    <section class="stack">
 
-      <ul>
-        <li>Lambda functions</li>
-        <li>Combinators</li>
-        <li>Monads</li>
-        <li>Memoization</li>
-        <li>Trampolines</li>
-        <li>Tail-call optimization</li>
-      </ul>
+      <section class="">
+        <h1>And More Things</h1>
+        <p>There is a lot to know about FP</p>
+      </section>
+
+      <section class="">
+        <h2>Topics</h2>
+
+        <ul>
+          <li class="fragment">Lambda functions</li>
+          <li class="fragment">Combinators</li>
+          <li class="fragment">Monads</li>
+          <li class="fragment">Memoization</li>
+          <li class="fragment">Trampolines</li>
+          <li class="fragment">Tail-call optimization</li>
+        </ul>
+      </section>
+
+      <section class="">
+        <h2>Books</h2>
+
+        <ul>
+          <li>JavaScript Allongé</li>
+          <li>Functional JavaScript</li>
+        </ul>
+      </section>
+
+      <section class="">
+        <h2>Posts</h2>
+
+        <ul>
+          <li><a href="http://www.smashingmagazine.com/2014/07/02/dont-be-scared-of-functional-programming">Don't be scared of functional programming</a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="">
+        <h2>Other Interesting Talks</h2>
+
+        <ul>
+          <li>Underscore, you're doing it wrong</li>
+        </ul>
+      </section>
+
+      <section class="">
+        <h2>Other Real Cool Junk</h2>
+
+        <ul>
+          <li>Annotated Underscore source</li>
+          <li>https://jhusain.github.io/learnrx</li>
+        </ul>
+      </section>
+
     </section>
 
-    <!-- Chapter 5 -->
-    <section class="" data-id="432423c8553a486d54143970bcc06a53">
-      <h1>Just Lots Of Resources</h1>
-
-      <h4>books:</h4>
-      <ul>
-        <li>JavaScript Allongé</li>
-        <li>Functional JavaScript</li>
-      </ul>
-
-      <h4>posts:</h4>
-      <ul>
-        <li><a href="http://www.smashingmagazine.com/2014/07/02/dont-be-scared-of-functional-programming">Don't be scared of functional programming</a>
-        </li>
-      </ul>
-
-      <h4>vids:</h4>
-      <ul>
-        <li>Underscore, you're doing it wrong</li>
-      </ul>
-
-      <h4>other junk:</h4>
-      <ul>
-        <li>Annotated Underscore source</li>
-        <li>https://jhusain.github.io/learnrx</li>
-      </ul>
+    <section>
+      <h1>Thank You For Coming Here, Today</h1>
     </section>
 
   </div>
