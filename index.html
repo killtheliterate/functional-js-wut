@@ -46,14 +46,19 @@ if (window.location.search.match(/print-pdf/gi)) {
 
     <section>
       <h1>Functional JavaScript. Wut?</h1>
+
       <p>In which I expound on things that are interesting to me.</p>
 
+      <br />
+
+      <p>Garrett Dawson</p>
+      <p>@killtheliterate</p>
+
       <aside class="notes">
-        <p>Welcome to my talk</p>
-        <p>I've been really focusing on learning JS</p>
-        <p>That's led me to funcitonal programming via JS</p>
-        <p>It's exciting</p>
-        <p>I don't have all the answers, but thought I would share what I've been learning about, what excites me</p>
+        <p>I'm a front-end dev of 5 years, and I work at Placeable</p>
+        <p>I started in Drupal, accidentally became a PHP developer.</p>
+        <p>Decided to refocus on JS, and have been learning much via studying FP</p>
+        <p>I'm a beginner</p>
       </aside>
     </section>
 
@@ -166,6 +171,7 @@ if (window.location.search.match(/print-pdf/gi)) {
 
         <aside class="notes">
           <p>Here, we add a function to our argument list. It gets fired off from the original function, since it's been aliased to func</p>
+          <p>Probably looks a bit familiar. Like a callback in an event handler</p>
         </aside>
       </section>
 
@@ -198,10 +204,11 @@ if (window.location.search.match(/print-pdf/gi)) {
     <section class="stack">
 
       <section class="">
-        <h1>Why Functional Programming?</h1>
-        <p>And why do it with JavaScript?</p>
+        <h1>Why Functionally Program with JavaScript?</h1>
 
         <aside class="notes">
+          <p>Why functionally program? And why do it with JavaScript?</p>
+          <p>I'll go over some of the motivations to learn the functional aspects of JS</p>
         </aside>
       </section>
 
@@ -214,7 +221,8 @@ if (window.location.search.match(/print-pdf/gi)) {
         </ul>
 
         <aside class="notes">
-          <p>Since FP is a language feature of JS, it available. Some of the best aspects of JS are it's functions, says Crockford</p>
+          <p>First, lets double check that JS qualifies as a functional language</p>
+          <p>Since FP is a language feature of JS, it's probably worth learning about. Turns out, it's one of the best features of JavaScript</p>
         </aside>
       </section>
 
@@ -267,15 +275,7 @@ if (window.location.search.match(/print-pdf/gi)) {
 
         <aside class="notes">
           <p>I'll show you a few of the absractions we can use with FP, now that we have first class functions and high order functions.</p>
-          <ul>
-            <li>First, a review</li>
-            <li>Use recursion for looping</li>
-            <li>Build curried functions</li>
-            <li>Use Array.prototype#methods</li>
-            <li>Build predicate functions</li>
-            <li>Compose functions with functions</li>
-            <li>Use closures</li>
-          </ul>
+          <p>Notice, there is a lot of overlap between some of these techniques. They sort of enable one another</p>
         </aside>
       </section>
 
@@ -287,6 +287,10 @@ if (window.location.search.match(/print-pdf/gi)) {
           <li class="fragment">What function expressions are</li>
           <li class="fragment">What high-order functions are</li>
         </ul>
+        <aside class="notes">
+          <p>With first class functions, suddenly you have a lot of tricks you can pull off</p>
+          <p>I'll talk about some of those tricks, why they're useful.</p>
+        </aside>
       </section>
 
       <section class="">
@@ -310,6 +314,7 @@ if (window.location.search.match(/print-pdf/gi)) {
         </pre>
 
         <aside class="notes">
+          <p>First up, let's talk about how state is dealt with in FP</p>
           <ul>
             <li>What is state? It's what keeps track of the state of our program, where it's at, what values it's messing with</li>
             <li>Like, what page am I on? What todo have I selected?</li>
@@ -331,13 +336,16 @@ if (window.location.search.match(/print-pdf/gi)) {
                 return n + 1;
             };
 
-            increment(number);
+            increment(number); // 2
+            increment(number); // 2
+            increment(number); // 2
           </code>
 
           * Stephen Young <a href="http://stephen-young.me.uk/2013/01/20/functional-programming-with-javascript.html">[2]</a>
         </pre>
 
         <aside class="notes">
+          <p>This function looks almost the same as before, except this time we're passing an argument</p>
           <p>The point of stateless functions is to always get the same results from a function call when the same value is passed. This means the functions are more predictable. Kind of a big deal for concurrency</p>
           <p>This kind of results in a pipeline of new stuff, instead of changing other stuff</p>
           <p>Like a hierarchy. Changing global states can have unexpected consequences</p>
@@ -351,6 +359,11 @@ if (window.location.search.match(/print-pdf/gi)) {
           <p>To understand recursion, you must understand recursion.</p>
           <p>*Anonymous</p>
         </blockquote>
+
+        <aside class="notes">
+          <p>knowing how to deal with state is important in FP, and one technique uses recursion</p>
+        </aside>
+
       </section>
 
       <section class="">
@@ -377,6 +390,7 @@ if (window.location.search.match(/print-pdf/gi)) {
         </pre>
 
         <aside class="notes">
+          <p>Notice that we're not using a for loop, because for loops are stateful</p>
           <ul>
             <li>Can be stateless</li>
             <li>Can be memoized</li>
@@ -431,7 +445,7 @@ if (window.location.search.match(/print-pdf/gi)) {
 
         <blockquote>
           <p>Applicative programming is a technique that allows a function to be applied to each element of a list</p>
-          <p>*Mary Simoni <a href="http://quod.lib.umich.edu/s/spobooks/bbv9810.0001.001/1:15/--algorithmic-composition-a-gentle-introduction-to-music?rgn=div1;view=fulltext">[4]</a></p>
+          <p>*Mary Simoni <a href="http://quod.lib.umich.edu/s/spobooks/bbv9810.0001.001/1:15/--algorithmic-composition-a-gentle-introduction-to-music?rgn=div1;view=fulltext">[3]</a></p>
         </blockquote>
 
         <aside class="notes">
@@ -515,7 +529,7 @@ if (window.location.search.match(/print-pdf/gi)) {
 
         <blockquote>
           <p>It’s really that simple: Whenever you are chaining two or more functions together, you’re composing them</p>
-          <p>*Reginald Braithwaite <a href="http://braythwayt.com/">[3]</a></p>
+          <p>*Reginald Braithwaite <a href="http://braythwayt.com/">[4]</a></p>
         </blockquote>
       </section>
 
@@ -539,15 +553,16 @@ if (window.location.search.match(/print-pdf/gi)) {
         </pre>
 
         <aside class="notes">
-          <p>asdfasdfasdf</p>
+          <p>This is one of my favorites. Notice it's leveraging partial application.</p>
+          <p>This ties into the idea of DRY. Make symbol, general purpose functions that you combine into more complex or specific functions.</p>
         </aside>
       </section>
 
       <section class="">
         <h2>Use Closures</h2>
         <blockquote>
-          <p>A closure is an inner function that has access to the outer (enclosing) function’s variables—scope chain. The closure has three scope chains: it has access to its own scope (variables defined between its curly brackets), it has access to the outer function’s variables, and it has access to the global variables.</p>
-          <p>*<a href="http://javascriptissexy.com/understand-javascript-closures-with-ease/">[]</a></p>
+          <p>Closures are functions that refer to independent (free) variables... the function defined in the closure "remembers" the environment in which it was created.</p>
+          <p>*Person that wrote the MDN page<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures">[5]</a></p>
         </blockquote>
       </section>
 
@@ -569,8 +584,10 @@ if (window.location.search.match(/print-pdf/gi)) {
         </pre>
 
         <aside class="notes">
-          <p>Check out closures. Same as curried functions.</p>
-          <p>Talk about funciton context. Lexical scope. Every inner level can access its outer level</p>
+          <p>Closures are much easier than they are made out to be, because a lot of folks are introduced to them in the wrong way.</p>
+          <p>People point at IIFE and say "there is a closure". Which is true, but kind of besides the point of an IIFE.
+          <p>Closures are why we can curry functions in JS.</p>
+          <p>Function context and lexical scope are why closures work.</p>
         </aside>
       </section>
 
@@ -600,6 +617,10 @@ if (window.location.search.match(/print-pdf/gi)) {
             }); // [2, 4, 6]
           </code>
         </pre>
+
+        <aside class="notes">
+          <p>RTFM. The underscore annotated source is SOOOOOO good</p>
+        </aside>
       </section>
 
       <section>
@@ -616,61 +637,18 @@ if (window.location.search.match(/print-pdf/gi)) {
     </section>
 
     <!-- Chapter 5 -->
-    <section class="stack">
+    <section class="">
+      <h1>And More Things</h1>
+      <p>There is a lot to know about FP</p>
 
-      <section class="">
-        <h1>And More Things</h1>
-        <p>There is a lot to know about FP</p>
-      </section>
-
-      <section class="">
-        <h2>Topics</h2>
-
-        <ul>
-          <li class="fragment">Lambda functions</li>
-          <li class="fragment">Combinators</li>
-          <li class="fragment">Monads</li>
-          <li class="fragment">Memoization</li>
-          <li class="fragment">Trampolines</li>
-          <li class="fragment">Tail-call optimization</li>
-        </ul>
-      </section>
-
-      <section class="">
-        <h2>Books</h2>
-
-        <ul>
-          <li>JavaScript Allongé</li>
-          <li>Functional JavaScript</li>
-        </ul>
-      </section>
-
-      <section class="">
-        <h2>Posts</h2>
-
-        <ul>
-          <li><a href="http://www.smashingmagazine.com/2014/07/02/dont-be-scared-of-functional-programming">Don't be scared of functional programming</a>
-          </li>
-        </ul>
-      </section>
-
-      <section class="">
-        <h2>Other Interesting Talks</h2>
-
-        <ul>
-          <li>Underscore, you're doing it wrong</li>
-        </ul>
-      </section>
-
-      <section class="">
-        <h2>Other Real Cool Junk</h2>
-
-        <ul>
-          <li>Annotated Underscore source</li>
-          <li>https://jhusain.github.io/learnrx</li>
-        </ul>
-      </section>
-
+      <ul>
+        <li class="fragment">Lambda functions</li>
+        <li class="fragment">Combinators</li>
+        <li class="fragment">Monads</li>
+        <li class="fragment">Memoization</li>
+        <li class="fragment">Trampolines</li>
+        <li class="fragment">Tail-call optimization</li>
+      </ul>
     </section>
 
     <section>
