@@ -2,4 +2,4 @@ functional-js-wut
 =================
 
 A deck for Develop Denver
-/Users/killtheliterate/Dropbox/dev:design/presentations/functional-js-wut/slides/README.md/Users/killtheliterate/Dropbox/dev:design/presentations/functional-js-wut/slides/README.md
+A deck for Colorado Springs JS
