@@ -18,12 +18,6 @@
 <!-- For syntax highlighting -->
 <link rel="stylesheet" href="lib/css/zenburn.css">
 
-<style>
-  code {
-    font-size: 2em;
-  }
-</style>
-
 <!-- If the query includes 'print-pdf', include the PDF print sheet -->
 <script>
 if (window.location.search.match(/print-pdf/gi)) {
@@ -55,10 +49,10 @@ if (window.location.search.match(/print-pdf/gi)) {
       <p>@killtheliterate</p>
 
       <aside class="notes">
-        <p>I'm a front-end dev of 5 years, and I work at Placeable</p>
+        <p>I've been a front-end dev of 5 years. I work at VictorOps</p>
         <p>I started in Drupal, accidentally became a PHP developer.</p>
-        <p>Decided to refocus on JS, and have been learning much via studying FP</p>
-        <p>I'm a beginner</p>
+        <p>I Decided to refocus on JS, and have been learning a lot by studying FP</p>
+        <p>I'm a beginner. I hope I always will be.</p>
       </aside>
     </section>
 
@@ -70,9 +64,8 @@ if (window.location.search.match(/print-pdf/gi)) {
         <p>It is a programming style that "...produces abstraction through clever ways of combining functions" <a href="http://eloquentjavascript.net/chapter6.html#p1029fd844bd24fc8">[1]</a></p>
 
         <aside class="notes">
-          <p>What is abstraction? It's a less verbose way of describing the solution to the problem</p>
-          <p>Why is abstraction good? It allows us to write more generalized solutions.</p>
-
+          <p>What is abstraction? It's a less verbose way of describing the solution to a problem</p>
+          <p>Why is abstraction good? It allows us to write more generalized solutions. DRY</p>
           <p>At it's core, the function is an abstraction. It encapsulates some operation we would like to do over and over</p>
         </aside>
       </section>
@@ -80,10 +73,11 @@ if (window.location.search.match(/print-pdf/gi)) {
       <section class="">
         <h1>What Is Functional Programming?</h1>
         <p>How is abstraction produced using this style of programming?</p>
-        <p class="fragment">By Leveraging <b>first class functions</b> and <b>high order functions</b></p>
+        <p class="fragment">By Leveraging <b>first class functions</b> and <b>higher-order functions</b></p>
+        <p class="fragment">...also, by pretty much hating global state</p>
 
         <aside class="notes">
-          <p>Pretty straight-up. So, we'll need a functional language, then.</p>
+          <p>Straight-up. So, we'll need a functional language, then.</p>
         </aside>
       </section>
 
@@ -93,13 +87,14 @@ if (window.location.search.match(/print-pdf/gi)) {
         <ul>
           <li class="fragment">FP needs to be facilitated by language features</li>
           <li class="fragment">Some languages are strictly functional - <b>Haskell</b></li>
-          <li class="fragment">Some languages are functional without strict enforcement - <b>JavaScript</b></li>
+          <li class="fragment">Some languages are functional without strict enforcement - <b>Scala</b></li>
         </ul>
 
         <aside class="notes">
-          <p>Obviously, the things we've talked about need to be facilitated by language</p>
-          <p>Some languages are pure functional, others are a mash-up</p>
+          <p>Obviously, the things we've talked about need to be facilitated by the programming language</p>
+          <p>Some languages are purely functional, others are a mash-up</p>
           <p>I'll be using JavaScript as the language of example</p>
+          <p>FP is such a good idea, many languages incorporate things like lambdas</p>
         </aside>
       </section>
 
@@ -108,7 +103,7 @@ if (window.location.search.match(/print-pdf/gi)) {
         <p>First class functions are <b>values</b>, and can be used in every way that typical expressions can</p>
 
         <aside class="notes">
-          <p>They are values. The benefit from all the advantages of being values.</p>
+          <p>They are values. The benefit from all the advantages of being values. Code = data</p>
           <p>Assignment, return, argument, etc.</p>
         </aside>
       </section>
@@ -128,6 +123,7 @@ if (window.location.search.match(/print-pdf/gi)) {
 
         <aside class="notes">
           <p>You can see here that we are assigning a function to a variable.</p>
+          <p>This is the essence of "lambdas"</p>
           <p>Note that it's not the return value of the function that is assigned, but the function itself.</p>
           <p>Expression vs. declaration. Declarations are basically destructured to expressions</p>
         </aside>
@@ -176,8 +172,8 @@ if (window.location.search.match(/print-pdf/gi)) {
       </section>
 
       <section class="">
-        <h2>High Order Functions</h2>
-        <p>Use functions as its parameters <b>and</b> return a function</p>
+        <h2>Higher-Order Functions</h2>
+        <p>Use functions as its parameters <b>and/or</b> return a function</p>
 
         <pre class="fragment">
           <code>
@@ -192,9 +188,8 @@ if (window.location.search.match(/print-pdf/gi)) {
         </pre>
 
         <aside class="notes">
-          <p>This is pretty close to the last one</p>
-          <p>It's really the combination of all of the above</p>
-          <p>Also notice I immediately invoke the function at the end</p>
+          <p>Functions that operate on functions</p>
+          <p>Notice the immediate function invocation at the end</p>
         </aside>
       </section>
 
@@ -216,13 +211,15 @@ if (window.location.search.match(/print-pdf/gi)) {
         <h2>FP is a Language Feature</h2>
 
         <ul>
-          <li class="fragment">JS has first class functions (function expressions)</li>
-          <li class="fragment">JS has high-order functions</li>
+          <li class="fragment">JS has first class functions (and anonymous function expressions)</li>
+          <li class="fragment">JS has higher-order functions</li>
+          <li class="fragment">JS has closures (we'll talk about this later)</li>
         </ul>
 
         <aside class="notes">
-          <p>First, lets double check that JS qualifies as a functional language</p>
-          <p>Since FP is a language feature of JS, it's probably worth learning about. Turns out, it's one of the best features of JavaScript</p>
+          <p>First, lets check that JS meets our criteria for FP</p>
+          <p>Since FP is core to JS, you need to know it to be good at JS</p>
+          <p>Turns out, it's one of the best features of JavaScript</p>
         </aside>
       </section>
 
@@ -238,12 +235,7 @@ if (window.location.search.match(/print-pdf/gi)) {
         <aside class="notes">
           <p>Small functions are testable</p>
           <p>Small functions are single responsibility, less cognitive load</p>
-
-          <ul>
-            <li>It also makes you a better programmer by...</li>
-            <li>Increasing the depth of your JS knowledge and...</li>
-            <li>If all goes well, results in elegant code</li>
-          </ul>
+          <p>Well encapsulated code is elegant</p>
         </aside>
       </section>
 
@@ -256,11 +248,11 @@ if (window.location.search.match(/print-pdf/gi)) {
           <li class="fragment">Erlang</li>
           <li class="fragment">Scala</li>
           <li class="fragment">Clojure</li>
-          <li class="fragment">Many more...</li>
+          <li class="fragment">Uh... math</li>
         </ul>
 
         <aside class="notes">
-          <p>It gives you a powerful concept that may lead you elsewhere</p>
+          <p>It gives you a powerful paradigm that may lead you elsewhere</p>
         </aside>
       </section>
 
@@ -274,8 +266,8 @@ if (window.location.search.match(/print-pdf/gi)) {
         <p>How, functional JavaScript?</p>
 
         <aside class="notes">
-          <p>I'll show you a few of the absractions we can use with FP, now that we have first class functions and high order functions.</p>
-          <p>Notice, there is a lot of overlap between some of these techniques. They sort of enable one another</p>
+          <p>We meet our criteria, let's see some examples</p>
+          <p>These "techniques" are built of one another</p>
         </aside>
       </section>
 
@@ -285,7 +277,7 @@ if (window.location.search.match(/print-pdf/gi)) {
 
         <ul>
           <li class="fragment">What function expressions are</li>
-          <li class="fragment">What high-order functions are</li>
+          <li class="fragment">What higher-order functions are</li>
         </ul>
         <aside class="notes">
           <p>With first class functions, suddenly you have a lot of tricks you can pull off</p>
@@ -295,7 +287,7 @@ if (window.location.search.match(/print-pdf/gi)) {
 
       <section class="">
         <h2>Stateless functions</h2>
-        <p>Stateful functions mutate variables outside of their scope. FP avoids mutation.</p>
+        <p>Stateful functions mutate state outside of their scope. FP avoids mutation.</p>
 
         <pre class="fragment">
           <code>
@@ -316,9 +308,9 @@ if (window.location.search.match(/print-pdf/gi)) {
         <aside class="notes">
           <p>First up, let's talk about how state is dealt with in FP</p>
           <ul>
-            <li>What is state? It's what keeps track of the state of our program, where it's at, what values it's messing with</li>
-            <li>Like, what page am I on? What todo have I selected?</li>
-            <li>At a lower level, it's storing state in variables</li>
+            <li>What is state? It's simply the state of our program. What we're doing, what we're messing with</li>
+            <li>What todo have I selected? What page am I editing?</li>
+            <li>State, at root, is stored in containers (variables)</li>
             <li>How does FP avoid mutating state?</li>
           </ul>
         </aside>
@@ -326,7 +318,7 @@ if (window.location.search.match(/print-pdf/gi)) {
 
       <section>
         <h2>Stateless Functions</h2>
-        <p>Stateless functions don't mutate variables outside their scope</p>
+        <p>Stateless functions don't mutate state outside their scope</p>
 
         <pre class="fragment">
           <code>
@@ -345,10 +337,12 @@ if (window.location.search.match(/print-pdf/gi)) {
         </pre>
 
         <aside class="notes">
+          <p>Async!</p>
           <p>This function looks almost the same as before, except this time we're passing an argument</p>
-          <p>The point of stateless functions is to always get the same results from a function call when the same value is passed. This means the functions are more predictable. Kind of a big deal for concurrency</p>
-          <p>This kind of results in a pipeline of new stuff, instead of changing other stuff</p>
-          <p>Like a hierarchy. Changing global states can have unexpected consequences</p>
+          <p>We want a function to always give the same value back.</p>
+          <p>We can build pipelines this way</p>
+          <p>Mutating shared states can have unexpected consequences</p>
+          <p>Shared state makes async programming hard. Maybe impossible</p>
         </aside>
       </section>
 
@@ -361,7 +355,8 @@ if (window.location.search.match(/print-pdf/gi)) {
         </blockquote>
 
         <aside class="notes">
-          <p>knowing how to deal with state is important in FP, and one technique uses recursion</p>
+          <p>So, if we're stateless, how do we loop?</p>
+          <p>One way is to leverage recursion</p>
         </aside>
 
       </section>
@@ -390,13 +385,142 @@ if (window.location.search.match(/print-pdf/gi)) {
         </pre>
 
         <aside class="notes">
-          <p>Notice that we're not using a for loop, because for loops are stateful</p>
+          <p>Notice that we're not using a for or while loop, because they are stateful</p>
           <ul>
             <li>Can be stateless</li>
             <li>Can be memoized</li>
-            <li>Have a call stack limitations</li>
-            <li>Can be trampolined</li>
+            <li>Caveat: Have a call stack limitations</li>
+            <li>So: Can be trampolined</li>
           </ul>
+        </aside>
+      </section>
+
+
+      <section class="">
+        <h2>Use Array.prototype#Methods</h2>
+
+        <blockquote>
+          <p>Applicative programming is a technique that allows a function to be applied to each element of a list</p>
+          <p>*Mary Simoni <a href="http://quod.lib.umich.edu/s/spobooks/bbv9810.0001.001/1:15/--algorithmic-composition-a-gentle-introduction-to-music?rgn=div1;view=fulltext">[3]</a></p>
+        </blockquote>
+
+        <aside class="notes">
+          <p>More looping!</p>
+          <p>Looping on lists is crucial</p>
+        </aside>
+      </section>
+
+      <section class="">
+        <h2>Use Array.prototype#Methods</h2>
+
+        <p>Array.prototype.map()</p>
+
+        <pre class="fragment">
+          <code>
+            var squared = [1, 2, 3, 4, 5].map(function(el) {
+              return Math.pow(el, 2);
+            }); // [1, 4, 9, 16, 25]
+          </code>
+        </pre>
+
+        <aside class="notes">
+          <p>Projection</p>
+          <p>We're not mutating the array. We're storing our return in a new bucket.</p>
+        </aside>
+      </section>
+
+      <section class="">
+        <h2>Use Array.prototype#Methods</h2>
+
+        <p>Array.prototype.filter()</p>
+
+        <pre class="fragment">
+          <code>
+            var even = [1, 2, 3, 4, 5].filter(function(el) {
+              return el % 2 === 0;
+            }); // [2, 4]
+          </code>
+        </pre>
+
+        <aside class="notes">
+        </aside>
+      </section>
+
+      <section class="">
+        <h2>Use Array.prototype#Methods</h2>
+
+        <p>Array.prototype.reduce()</p>
+
+        <pre class="fragment">
+          <code>
+            var sum = [1, 2, 3, 4, 5].reduce(function(memo, curr) {
+              return memo + curr;
+            }); // 15
+          </code>
+        </pre>
+
+        <aside class="notes">
+          <p>Projection</p>
+          <p>Tricks like algebraic logic. Can reduce to true/false.</p>
+          <p>Can reduce a list to another type. Array to Object</p>
+        </aside>
+      </section>
+
+      <section class="">
+        <h2>Build Predicate Functions</h2>
+
+        <blockquote>
+          <p>A predicate determines whether or not something is true or false.</p>
+        </blockquote>
+      </section>
+
+      <section class="">
+        <h2>Build Predicate Functions</h2>
+
+        <pre class="fragment">
+          <code>
+            var isNull = function(obj) {
+                return obj === null;
+            };
+
+            isNull(null) // true
+          </code>
+        </pre>
+
+        <aside class="notes">
+          <p>Array.prototype.filter() could use a predicate.</p>
+        </aside>
+      </section>
+
+      <section class="">
+        <h2>Use Closures</h2>
+        <blockquote>
+          <p>Closures are functions that refer to independent (free) variables... the function defined in the closure "remembers" the environment in which it was created.</p>
+          <p>*Person that wrote the MDN page<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures">[5]</a></p>
+        </blockquote>
+      </section>
+
+      <section class="">
+        <h2>Use Closures</h2>
+
+        <pre class="fragment">
+          <code>
+            function stringCount(string) {
+              return function(subString) {
+                return string.match(new RegExp(subString, 'g')).length;
+              };
+            }
+
+            var count = stringCount('sup sup sup');
+
+            count('sup'); // 3
+          </code>
+        </pre>
+
+        <aside class="notes">
+          <p>Closures are much easier than they are made out to be, because a lot of folks are introduced to them in the wrong way.</p>
+          <p>Function context (call-site) and lexical scope (variable lookup) are why JS has closures.</p>
+          <p>Closures are why we can curry functions in JS.</p>
         </aside>
       </section>
 
@@ -429,98 +553,12 @@ if (window.location.search.match(/print-pdf/gi)) {
         </pre>
 
         <aside class="notes">
-          <p>Closures also</p>
-          <p>Function context. Talk about this more with closures.</p>
           <ul>
             <li>Functions made up of unary functions</li>
             <li>Functions that wait to yield a value until all arguments are passed</li>
             <li>In other words, a variadic function made of nested unary functions</li>
             <li>Can be approximated using Function.prototype.bind()</li>
           </ul>
-        </aside>
-      </section>
-
-      <section class="">
-        <h2>Use Array.prototype#Methods</h2>
-
-        <blockquote>
-          <p>Applicative programming is a technique that allows a function to be applied to each element of a list</p>
-          <p>*Mary Simoni <a href="http://quod.lib.umich.edu/s/spobooks/bbv9810.0001.001/1:15/--algorithmic-composition-a-gentle-introduction-to-music?rgn=div1;view=fulltext">[3]</a></p>
-        </blockquote>
-
-        <aside class="notes">
-          <p>Ever used these Array methods? Then you've been doing applicative programming. Functional Fu.</p>
-        </aside>
-      </section>
-
-      <section class="">
-        <h2>Use Array.prototype#Methods</h2>
-
-        <p>Array.prototype.map()</p>
-
-        <pre class="fragment">
-          <code>
-            var squared = [1, 2, 3, 4, 5].map(function(el) {
-              return Math.pow(el, 2);
-            }); // [1, 4, 9, 16, 25]
-          </code>
-        </pre>
-
-        <aside class="notes">
-          <p>Note that we're not mutating here, storing our return in a new bucket.</p>
-        </aside>
-      </section>
-
-      <section class="">
-        <h2>Use Array.prototype#Methods</h2>
-
-        <p>Array.prototype.filter()</p>
-
-        <pre class="fragment">
-          <code>
-            var even = [1, 2, 3, 4, 5].filter(function(el) {
-              return el % 2 === 0;
-            }); // [2, 4]
-          </code>
-        </pre>
-      </section>
-
-      <section class="">
-        <h2>Use Array.prototype#Methods</h2>
-
-        <p>Array.prototype.reduce()</p>
-
-        <pre class="fragment">
-          <code>
-            var sum = [1, 2, 3, 4, 5].reduce(function(memo, curr) {
-              return memo + curr;
-            }); // 15
-          </code>
-        </pre>
-      </section>
-
-      <section class="">
-        <h2>Build Predicate Functions</h2>
-
-        <blockquote>
-          <p>A predicate determines whether or not something is true or false.</p>
-        </blockquote>
-      </section>
-
-      <section class="">
-        <h2>Build Predicate Functions</h2>
-
-        <pre class="fragment">
-          <code>
-            var isNull = function(obj) {
-                return obj === null;
-            };
-
-            isNull(null) // true
-          </code>
-        </pre>
-        <aside class="notes">
-          <p>Talk about filter.</p>
         </aside>
       </section>
 
@@ -555,39 +593,6 @@ if (window.location.search.match(/print-pdf/gi)) {
         <aside class="notes">
           <p>This is one of my favorites. Notice it's leveraging partial application.</p>
           <p>This ties into the idea of DRY. Make symbol, general purpose functions that you combine into more complex or specific functions.</p>
-        </aside>
-      </section>
-
-      <section class="">
-        <h2>Use Closures</h2>
-        <blockquote>
-          <p>Closures are functions that refer to independent (free) variables... the function defined in the closure "remembers" the environment in which it was created.</p>
-          <p>*Person that wrote the MDN page<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures">[5]</a></p>
-        </blockquote>
-      </section>
-
-      <section class="">
-        <h2>Use Closures</h2>
-
-        <pre class="fragment">
-          <code>
-            function stringCount(string) {
-              return function(subString) {
-                return string.match(new RegExp(subString, 'g')).length;
-              };
-            }
-
-            var count = stringCount('sup sup sup');
-
-            count('sup'); // 3
-          </code>
-        </pre>
-
-        <aside class="notes">
-          <p>Closures are much easier than they are made out to be, because a lot of folks are introduced to them in the wrong way.</p>
-          <p>People point at IIFE and say "there is a closure". Which is true, but kind of besides the point of an IIFE.
-          <p>Closures are why we can curry functions in JS.</p>
-          <p>Function context and lexical scope are why closures work.</p>
         </aside>
       </section>
 
@@ -642,17 +647,15 @@ if (window.location.search.match(/print-pdf/gi)) {
       <p>There is a lot to know about FP</p>
 
       <ul>
-        <li class="fragment">Lambda functions</li>
+        <li class="fragment">Functors</li>
+        <li class="fragment">Monads! (value burritos, mmm)</li>
+        <li class="fragment">Promises (an monad)</li>
         <li class="fragment">Combinators</li>
-        <li class="fragment">Monads</li>
-        <li class="fragment">Memoization</li>
-        <li class="fragment">Trampolines</li>
-        <li class="fragment">Tail-call optimization</li>
       </ul>
     </section>
 
     <section>
-      <h1>Thank You For Coming Here, Today</h1>
+      <h1>Go forth and write better JavaScript.</h1>
     </section>
 
   </div>
