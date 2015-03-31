@@ -115,7 +115,7 @@ if (window.location.search.match(/print-pdf/gi)) {
 
         <pre class="fragment">
           <code>
-            var foo = function() {return 'hai'};
+            var foo = function() { return 'hai' };
 
             foo(); // "hai"
           </code>
@@ -137,10 +137,10 @@ if (window.location.search.match(/print-pdf/gi)) {
         <pre class="fragment">
           <code>
             var bar = function() {
-              return function() {return 'hai'};
+              return function() { return 'hai' };
             };
 
-            bar(); // function () {return 'hai'}
+            bar(); // function() { return 'hai' }
           </code>
         </pre>
 
@@ -161,7 +161,7 @@ if (window.location.search.match(/print-pdf/gi)) {
               return func();
             };
 
-            baz(function() {return 'hai'}) // "hai"
+            baz(function() { return 'hai' }) // "hai"
           </code>
         </pre>
 
@@ -183,7 +183,7 @@ if (window.location.search.match(/print-pdf/gi)) {
               };
             };
 
-            bar(function() {return 'hai'})() // "hai"
+            bar(function() { return 'hai' })() // "hai"
           </code>
         </pre>
 
@@ -651,6 +651,7 @@ if (window.location.search.match(/print-pdf/gi)) {
         <li class="fragment">Monads! (value burritos, mmm)</li>
         <li class="fragment">Promises (an monad)</li>
         <li class="fragment">Combinators</li>
+        <li class="fragment">Types</li>
       </ul>
     </section>
 
