@@ -50,9 +50,7 @@ if (window.location.search.match(/print-pdf/gi)) {
 
       <aside class="notes">
         <p>I've been a front-end dev of 5 years. I work at VictorOps</p>
-        <p>I started in Drupal, accidentally became a PHP developer.</p>
-        <p>I Decided to refocus on JS, and have been learning a lot by studying FP</p>
-        <p>I'm a beginner. I hope I always will be.</p>
+        <p>I'm learning functional programming. Here are some things I've learned about</p>
       </aside>
     </section>
 
@@ -65,7 +63,7 @@ if (window.location.search.match(/print-pdf/gi)) {
 
         <aside class="notes">
           <p>What is abstraction? It's a less verbose way of describing the solution to a problem</p>
-          <p>Why is abstraction good? It allows us to write more generalized solutions. DRY</p>
+          <p>Why is abstraction good? It allows us to write more generalized solutions. It's DRY.</p>
           <p>At it's core, the function is an abstraction. It encapsulates some operation we would like to do over and over</p>
         </aside>
       </section>
@@ -74,10 +72,11 @@ if (window.location.search.match(/print-pdf/gi)) {
         <h1>What Is Functional Programming?</h1>
         <p>How is abstraction produced using this style of programming?</p>
         <p class="fragment">By Leveraging <b>first class functions</b> and <b>higher-order functions</b></p>
-        <p class="fragment">...also, by pretty much hating global state</p>
+        <p class="fragment">By avoiding mutating global state</p>
+        <p class="fragment"><bold>By treating functions as data</bold></p>
 
         <aside class="notes">
-          <p>Straight-up. So, we'll need a functional language, then.</p>
+          <p>Straight-up. We need a language that has these characteristics.</p>
         </aside>
       </section>
 
@@ -91,10 +90,10 @@ if (window.location.search.match(/print-pdf/gi)) {
         </ul>
 
         <aside class="notes">
-          <p>Obviously, the things we've talked about need to be facilitated by the programming language</p>
+          <p>The lanuage needs to have some characteristics that are categorically "functional"</p>
           <p>Some languages are purely functional, others are a mash-up</p>
+          <p>FP is such a good idea, many languages incorporate things like lambdas (PHP, Java)</p>
           <p>I'll be using JavaScript as the language of example</p>
-          <p>FP is such a good idea, many languages incorporate things like lambdas</p>
         </aside>
       </section>
 
@@ -103,7 +102,9 @@ if (window.location.search.match(/print-pdf/gi)) {
         <p>First class functions are <b>values</b>, and can be used in every way that typical expressions can</p>
 
         <aside class="notes">
-          <p>They are values. The benefit from all the advantages of being values. Code = data</p>
+          <p>They are values. The benefit from all the advantages of being values.</p>
+          <p>This means code = data, and is core to functional programming.</p>
+          <p>It's not that we program with functions, but that we use functions as values</p>
           <p>Assignment, return, argument, etc.</p>
         </aside>
       </section>
@@ -123,7 +124,7 @@ if (window.location.search.match(/print-pdf/gi)) {
 
         <aside class="notes">
           <p>You can see here that we are assigning a function to a variable.</p>
-          <p>This is the essence of "lambdas"</p>
+          <p>This is the essence of "lambdas". It's also the essence of "function as data"</p>
           <p>Note that it's not the return value of the function that is assigned, but the function itself.</p>
           <p>Expression vs. declaration. Declarations are basically destructured to expressions</p>
         </aside>
@@ -279,6 +280,7 @@ if (window.location.search.match(/print-pdf/gi)) {
           <li class="fragment">What function expressions are</li>
           <li class="fragment">What higher-order functions are</li>
         </ul>
+
         <aside class="notes">
           <p>With first class functions, suddenly you have a lot of tricks you can pull off</p>
           <p>I'll talk about some of those tricks, why they're useful.</p>
@@ -337,12 +339,12 @@ if (window.location.search.match(/print-pdf/gi)) {
         </pre>
 
         <aside class="notes">
-          <p>Async!</p>
           <p>This function looks almost the same as before, except this time we're passing an argument</p>
-          <p>We want a function to always give the same value back.</p>
-          <p>We can build pipelines this way</p>
-          <p>Mutating shared states can have unexpected consequences</p>
-          <p>Shared state makes async programming hard. Maybe impossible</p>
+          <p>We want a function to always give the same value back. Transparency = predictability</p>
+          <p>We can build pipelines this way. Async pipelines, even!</p>
+          <p>Mutating shared states can have unexpected consequences. Clone refs</p>
+          <p>Shared state makes async programming hard. You have to orchestrate state, instead of the runtime</p>
+          <p>Operate on values, instead of states</p>
         </aside>
       </section>
 
@@ -355,8 +357,8 @@ if (window.location.search.match(/print-pdf/gi)) {
         </blockquote>
 
         <aside class="notes">
-          <p>So, if we're stateless, how do we loop?</p>
-          <p>One way is to leverage recursion</p>
+          <p>So, if we're stateless, how do we loop? A few ways, one of which is recursion>iteration.</p>
+          <p>Can walk trees this way. Can avoid while() and for() this way</p>
         </aside>
 
       </section>
@@ -388,13 +390,13 @@ if (window.location.search.match(/print-pdf/gi)) {
           <p>Notice that we're not using a for or while loop, because they are stateful</p>
           <ul>
             <li>Can be stateless</li>
-            <li>Can be memoized</li>
             <li>Caveat: Have a call stack limitations</li>
             <li>So: Can be trampolined</li>
+            <li>Can be computationally expensive</li>
+            <li>So: Can be memoized</li>
           </ul>
         </aside>
       </section>
-
 
       <section class="">
         <h2>Use Array.prototype#Methods</h2>
@@ -406,6 +408,7 @@ if (window.location.search.match(/print-pdf/gi)) {
 
         <aside class="notes">
           <p>More looping!</p>
+          <p>Often times, we can model data as a list or set</p>
           <p>Looping on lists is crucial</p>
         </aside>
       </section>
@@ -424,7 +427,7 @@ if (window.location.search.match(/print-pdf/gi)) {
         </pre>
 
         <aside class="notes">
-          <p>Projection</p>
+          <p>Projection. OR MAPPING!!! take this to that</p>
           <p>We're not mutating the array. We're storing our return in a new bucket.</p>
         </aside>
       </section>
@@ -443,6 +446,8 @@ if (window.location.search.match(/print-pdf/gi)) {
         </pre>
 
         <aside class="notes">
+          <p>Duh. Reduce to the set you're interested in</p>
+          <p>The callback is a predicate. Returns true/false</p>
         </aside>
       </section>
 
@@ -506,7 +511,7 @@ if (window.location.search.match(/print-pdf/gi)) {
         <pre class="fragment">
           <code>
             function stringCount(string) {
-              return function(subString) {
+              return function(subString) { // this is the closure
                 return string.match(new RegExp(subString, 'g')).length;
               };
             }
@@ -519,8 +524,8 @@ if (window.location.search.match(/print-pdf/gi)) {
 
         <aside class="notes">
           <p>Closures are much easier than they are made out to be, because a lot of folks are introduced to them in the wrong way.</p>
-          <p>Function context (call-site) and lexical scope (variable lookup) are why JS has closures.</p>
-          <p>Closures are why we can curry functions in JS.</p>
+          <p>Function context (call-site) and lexical scope (variable look-up) are why JS has closures.</p>
+          <p>Closures are why we can curry functions in JS. AND OTHER THINGS!</p>
         </aside>
       </section>
 
@@ -539,6 +544,7 @@ if (window.location.search.match(/print-pdf/gi)) {
 
         <pre class="fragment">
           <code>
+            // foo(x, y, z)
             var foo = function (x) {
                return function (y) {
                  return function (z) {
@@ -592,7 +598,8 @@ if (window.location.search.match(/print-pdf/gi)) {
 
         <aside class="notes">
           <p>This is one of my favorites. Notice it's leveraging partial application.</p>
-          <p>This ties into the idea of DRY. Make symbol, general purpose functions that you combine into more complex or specific functions.</p>
+          <p>The core. Operate on functions as if they are data. Return shit</p>
+          <p>This ties into the idea of DRY. Make simple, general purpose functions that you combine into more complex or specific functions.</p>
         </aside>
       </section>
 
